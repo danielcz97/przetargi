@@ -17,6 +17,14 @@ class Claim extends Model implements HasMedia
     {
         $this->addMediaCollection('default')->useDisk('public');
     }
+    public function getMediaUrl()
+    {
+        $media = $this->getFirstMedia('default');
+        if ($media && $media->id <= 72910) {
+            return url("storage/{$media->file_name}");
+        }
+        return $media ? $media->getUrl() : null;
+    }
 
     protected $casts = [
         'terms' => 'array',

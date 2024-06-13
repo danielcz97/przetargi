@@ -56,7 +56,6 @@ class Property extends Model implements HasMedia
     protected $appends = [
         'location',
     ];
-
     public function getMediaUrl()
     {
         $media = $this->getFirstMedia('default');

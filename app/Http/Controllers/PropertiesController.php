@@ -47,6 +47,7 @@ class PropertiesController extends Controller
         return view('node.index', compact('property', 'properties', 'comunicats', 'formattedDateNumeric', 'formattedDateText', 'mainMediaUrl', 'galleryMedia', 'maps'));
     }
 
+
     public function printPage($slug)
     {
         $property = Property::where('slug', $slug)->firstOrFail();

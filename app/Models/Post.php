@@ -11,7 +11,14 @@ class Post extends Model implements HasMedia
     use InteractsWithMedia;
     protected $table = 'news';
     public $timestamps = false;
-
+    public function getMediaUrl()
+    {
+        $media = $this->getFirstMedia('default');
+        if ($media && $media->id <= 72910) {
+            return url("storage/{$media->file_name}");
+        }
+        return $media ? $media->getUrl() : null;
+    }
     protected $fillable = [
         'user_id',
         'title',
