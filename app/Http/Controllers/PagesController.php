@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Property;
@@ -11,6 +10,7 @@ class PagesController extends Controller
     public function index()
     {
         $today = Carbon::now()->format('Y-m-d');
+        $mediaUrlBase = env('MEDIA_URL', 'https://przetargi-gctrader.pl');
 
         $promotedNodes = Property::select('nieruchomosci.id', 'nieruchomosci.title', 'nieruchomosci.created', 'nieruchomosci.slug', 'nieruchomosci.cena', 'nieruchomosci.powierzchnia', 'nieruchomosci.terms')
             ->join('c144_nodes_premiums', 'nieruchomosci.id', '=', 'c144_nodes_premiums.node_id')
@@ -20,9 +20,9 @@ class PagesController extends Controller
             ->orderBy('nieruchomosci.created', 'desc')
             ->limit(10)
             ->get();
-        $promotedNodes->each(function ($node) {
+        $promotedNodes->each(function ($node) use ($mediaUrlBase) {
             $media = $node->getFirstMedia('default');
-            $node->thumbnail_url = $media ? $media->getUrl() : null;
+            $node->thumbnail_url = $media ? $mediaUrlBase . $media->getUrl() : null;
         });
 
         $latestNodes = Property::select('id', 'title', 'created', 'slug', 'cena', 'powierzchnia', 'terms')
@@ -31,21 +31,20 @@ class PagesController extends Controller
             ->limit(20)
             ->get();
 
-        $latestNodes->each(function ($node) {
+        $latestNodes->each(function ($node) use ($mediaUrlBase) {
             $media = $node->getFirstMedia('default');
-            $node->thumbnail_url = $media ? $media->getUrl() : null;
+            $node->thumbnail_url = $media ? $mediaUrlBase . $media->getUrl() : null;
         });
 
         $latestPosts = Post::select('id', 'title', 'created', 'slug')
             ->latest()
             ->take(6)
             ->get();
-        $latestPosts->each(function ($post) {
+        $latestPosts->each(function ($post) use ($mediaUrlBase) {
             $media = $post->getFirstMedia('default');
-            $post->thumbnail_url = $media ? $media->getUrl() : null;
+            $post->thumbnail_url = $media ? $mediaUrlBase . $media->getUrl() : null;
         });
 
         return view('welcome', compact('promotedNodes', 'latestNodes', 'latestPosts'));
     }
 }
-

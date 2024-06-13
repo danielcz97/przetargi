@@ -14,6 +14,7 @@ class SearchController extends Controller
     public function propertiesList(Request $request)
     {
         $query = Property::query();
+        $mediaUrlBase = env('MEDIA_URL', 'https://przetargi-gctrader.pl');
 
         $query->join('c144_nodes_teryts', 'nieruchomosci.id', '=', 'c144_nodes_teryts.node_id')
             ->select('nieruchomosci.*', 'c144_nodes_teryts.latitude', 'c144_nodes_teryts.longitude', 'c144_nodes_teryts.miasto');
@@ -64,7 +65,7 @@ class SearchController extends Controller
         $properties = $query->orderBy('created', 'desc')->paginate(15);
         foreach ($properties as $property) {
             $media = $property->getFirstMedia('default');
-            $property->thumbnail_url = $media ? $media->getUrl() : null;
+            $property->thumbnail_url = $media ? $mediaUrlBase . $media->getUrl() : null;
         }
         $maps = 'https://maps.googleapis.com/maps/api/js?key=' . env('GOOGLE_MAPS_API_KEY') . '&libraries=places';
 
@@ -75,6 +76,7 @@ class SearchController extends Controller
     public function ruchomosci(Request $request)
     {
         $query = MovableProperty::query();
+        $mediaUrlBase = env('MEDIA_URL', 'https://przetargi-gctrader.pl');
 
         $query->join('c144_nodes_teryts', 'ruchomosci.id', '=', 'c144_nodes_teryts.node_id')
             ->select('ruchomosci.*', 'c144_nodes_teryts.latitude', 'c144_nodes_teryts.longitude', 'c144_nodes_teryts.miasto');
@@ -125,7 +127,7 @@ class SearchController extends Controller
         $properties = $query->orderBy('created', 'desc')->paginate(15);
         foreach ($properties as $property) {
             $media = $property->getFirstMedia('default');
-            $property->thumbnail_url = $media ? $media->getUrl() : null;
+            $property->thumbnail_url = $media ? $mediaUrlBase . $media->getUrl() : null;
         }
         $maps = 'https://maps.googleapis.com/maps/api/js?key=' . env('GOOGLE_MAPS_API_KEY') . '&libraries=places';
 
@@ -135,6 +137,8 @@ class SearchController extends Controller
     public function komunikaty(Request $request)
     {
         $query = Comunicats::query();
+        $mediaUrlBase = env('MEDIA_URL', 'https://przetargi-gctrader.pl');
+
         $query->join('c144_nodes_teryts', 'komunikaty.id', '=', 'c144_nodes_teryts.node_id')
             ->select('komunikaty.*', 'c144_nodes_teryts.latitude', 'c144_nodes_teryts.longitude', 'c144_nodes_teryts.miasto');
 
@@ -160,7 +164,7 @@ class SearchController extends Controller
         $properties = $query->orderBy('created', 'desc')->paginate(15);
         foreach ($properties as $property) {
             $media = $property->getFirstMedia('default');
-            $property->thumbnail_url = $media ? $media->getUrl() : null;
+            $property->thumbnail_url = $media ? $mediaUrlBase . $media->getUrl() : null;
         }
         $maps = 'https://maps.googleapis.com/maps/api/js?key=' . env('GOOGLE_MAPS_API_KEY') . '&libraries=places';
 
@@ -170,6 +174,8 @@ class SearchController extends Controller
     public function wierzytelnosci(Request $request)
     {
         $query = Claim::query();
+        $mediaUrlBase = env('MEDIA_URL', 'https://przetargi-gctrader.pl');
+
         $query->join('c144_nodes_teryts', 'wierzytelnosci.id', '=', 'c144_nodes_teryts.node_id')
             ->select('wierzytelnosci.*', 'c144_nodes_teryts.latitude', 'c144_nodes_teryts.longitude', 'c144_nodes_teryts.miasto');
 
@@ -195,7 +201,7 @@ class SearchController extends Controller
         $properties = $query->orderBy('created', 'desc')->paginate(15);
         foreach ($properties as $property) {
             $media = $property->getFirstMedia('default');
-            $property->thumbnail_url = $media ? $media->getUrl() : null;
+            $property->thumbnail_url = $media ? $mediaUrlBase . $media->getUrl() : null;
         }
         $maps = 'https://maps.googleapis.com/maps/api/js?key=' . env('GOOGLE_MAPS_API_KEY') . '&libraries=places';
 
