@@ -276,7 +276,7 @@
         <div class="container py-6 py-lg-7 text-white overlay-content">
             <div class="row">
                 <div class="col-xl-8">
-                    <h1 class="display-3 fw-bold text-shadow d-none d-sm-block">Otoprzetargi</h1>
+                    <h1 class="display-3 fw-bold text-shadow d-none d-sm-block">Przetargi GC TRADER</h1>
                     <p class="text-lg text-shadow mb-6 d-none d-sm-block">GC Trader z siedzibą w Warszawie.</p>
                 </div>
             </div>

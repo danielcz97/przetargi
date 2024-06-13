@@ -30,8 +30,7 @@
     <nav class="navbar navbar-expand-md navbar-white bg-white" aria-label="Fourth navbar example">
         <div class="container">
             <a class="navbar-brand" href="/">
-                <img style="width:250px" src="{{ asset('img/logo.png') }}" class="img-responsive"
-                    alt="Logotyp otoprzetargi">
+                <h1>Przetargi GC TRADER</h1>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04"
                 aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">

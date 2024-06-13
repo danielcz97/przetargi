@@ -82,7 +82,7 @@
         <table class="header-table">
             <tr>
                 <td style="width: 50%;">
-                    <img width="125px" src="https://otoprzetargi.pl/img/logo.png" alt="Oto Przetargi logo">
+                    <h2>Przetargi GC TRADER</h2>
                 </td>
                 <td style="width: 50%; text-align: right;">
                     <p class="publication-info">Wydanie nr <strong>{{ $formattedDateNumeric }}</strong> z dnia
